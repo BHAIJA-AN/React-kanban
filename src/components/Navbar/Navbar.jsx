@@ -2,36 +2,22 @@ import './Navbar.css'
 import { MdOutlineTune } from "react-icons/md";
 import { FaAngleDown } from "react-icons/fa6";
 import { useState } from 'react';
+
 const groupOptions = [
-    {
-        label: "Status",
-        value: "status",
-    },
-    {
-        label: "User",
-        value: "user",
-    },
-    {
-        label: "Priority",
-        value: "priority",
-    }];
+    { label: "Status", value: "status" },
+    { label: "User", value: "user" },
+    { label: "Priority", value: "priority" }
+];
+
 const orderOptions = [
-    {
-        label: "Priority",
-        value: "priority",
-    },
-
-    {
-        label: "Title",
-        value: "title",
-    }];
-
+    { label: "Priority", value: "priority" },
+    { label: "Title", value: "title" }
+];
 
 const Navbar = ({ group, order, onGroupchange, onOrderChange }) => {
     const [expandMore, setExpandMore] = useState(false);
     const [groupedBy, setGroupedBy] = useState(group);
     const [orderedBy, setOrderedBy] = useState(order);
-
 
     const handleGroupChange = (e) => {
         setGroupedBy(e.target.value);
@@ -43,30 +29,28 @@ const Navbar = ({ group, order, onGroupchange, onOrderChange }) => {
         onOrderChange(e.target.value);
     }
 
-
-
     return (
         <div className='nav'>
             <div
                 className='expand_btn'
-                onClick={() => { setExpandMore(prev => !prev) }}
+                onClick={() => setExpandMore(prev => !prev)}
             >
                 <MdOutlineTune />
                 <span>Display</span>
                 <FaAngleDown />
             </div>
-            {expandMore && <div className="dropdown" >
+            {expandMore && <div className="dropdown">
                 <div className='display'>
                     <p>Grouping</p>
                     <select
                         name="group"
                         id="groupBy"
-                        defaultValue={group}
-                        onChange={handleGroupChange}>
+                        value={groupedBy}
+                        onChange={handleGroupChange}
+                    >
                         {groupOptions.map((opt, i) => (
                             <option key={i} value={opt.value}>{opt.label}</option>
                         ))}
-
                     </select>
                 </div>
                 <div className='display'>
@@ -74,7 +58,7 @@ const Navbar = ({ group, order, onGroupchange, onOrderChange }) => {
                     <select
                         name="order"
                         id="orderBy"
-                        defaultValue={order}
+                        value={orderedBy}
                         onChange={handleOrderChange}
                     >
                         {orderOptions.map((opt, i) => (
